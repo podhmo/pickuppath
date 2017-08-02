@@ -4,13 +4,14 @@ import os.path
 logger = logging.getLogger(__name__)
 
 
-def pickup_path(start_path, filename, default=None):
+def pickup_path(filename, current=None, default=None):
     """pickupping the config file path
 
     start path = "/foo/bar/boo", filename = "config.ini"
     finding candidates are ["/foo/bar/boo/config.ini", "/foo/bar/config.ini", "/foo/config.ini", "/config.ini"]
     """
-    start_point = os.path.normpath(os.path.abspath(start_path))
+    current = current or os.getcwd()
+    start_point = os.path.normpath(os.path.abspath(current))
     current = start_point
     candidates = []
     while True:
